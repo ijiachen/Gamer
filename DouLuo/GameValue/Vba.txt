@@ -1,0 +1,77 @@
+
+
+Function 去掉空字符(Mystr As String, Mysign1 As String, Mysign2 As String, Mysign3 As String, Mysign4 As String) As String
+  Dim a() As String
+  去掉空字符 = ""
+  If Mystr <> "" Then
+    a = Split(Mystr, Mysign1)
+    For i = 0 To UBound(a)
+      If a(i) <> "" Then
+        If 去掉空字符 = "" Then
+          去掉空字符 = a(i)
+        Else
+          去掉空字符 = 去掉空字符 & Mysign2 & a(i)
+        End If
+      End If
+    Next i
+  End If
+  If 去掉空字符 <> "" Then 去掉空字符 = Mysign3 & 去掉空字符 & Mysign4
+End Function
+
+
+Function 去掉头尾字符(Mystr As String, Mysign As String) As String
+  If Left(Mystr, 1) = Mysign Then Mystr = Right(Mystr, Len(Mystr) - 1)
+  If Right(Mystr, 1) = Mysign Then Mystr = Left(Mystr, Len(Mystr) - 1)
+  去掉头尾字符 = Mystr
+End Function
+
+  
+Function 区域扩大并取整合并(Myrange As Range, Mysign As String, Myvalue As Double)
+  Dim Myvar As Variant
+  区域扩大并取整合并 = ""
+  Myvar = Myrange
+  For i = LBound(Myvar) To UBound(Myvar)
+    For j = LBound(Myvar, 2) To UBound(Myvar, 2)
+    If Myvar(i, j) <> "" Then
+      If 区域扩大并取整合并 <> "" Then
+        区域扩大并取整合并 = 区域扩大并取整合并 & Mysign & CLng(Myvar(i, j) * Myvalue)
+      Else: 区域扩大并取整合并 = CLng(Myvar(i, j) * Myvalue)
+      End If
+    End If
+    Next j
+  Next i
+End Function
+
+
+
+Function 选取字符(Mys As String, Mysign As String, Myn As Integer) As String     '选取字符串数组中的指定位置的字符
+  Dim a() As String
+  a = Split(Mys, Mysign)
+  选取字符 = a(Myn - 1)
+End Function
+
+
+
+Function 指定合并单元格(Myrange As Range) As Range
+  Set 指定合并单元格 = Myrange.MergeArea.Cells(1, 1)
+End Function
+
+
+
+Function 数组统计(Myrange As Range, subsign As String, weizhi As Integer, tongji As String) As Integer
+    Dim Myvar As Variant
+    Dim a() As String
+    数组统计 = 0
+    Myvar = Myrange
+    For i = LBound(Myvar) To UBound(Myvar)
+        For j = LBound(Myvar, 2) To UBound(Myvar, 2)
+            If Myvar(i, j) <> "" Then
+                a = Split(Myvar(i, j), subsign)
+                    If a(weizhi) = tongji Then
+                     数组统计 = 数组统计 + 1
+                    End If
+                    
+            End If
+        Next j
+    Next i
+End Function
